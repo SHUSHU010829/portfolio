@@ -1,8 +1,18 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Montserrat, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({
+  subsets: ['latin-ext'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-montserrat',
+});
+
+const playFairDisplay = Playfair_Display({
+  subsets: ['latin-ext'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-playFairDisplay',
+});
 
 export const metadata: Metadata = {
   title: 'Shuyuan Chuang',
@@ -16,7 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${montserrat.variable} ${playFairDisplay.variable} font-sans`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
