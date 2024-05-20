@@ -1,12 +1,9 @@
+import { Link } from '@/components/link';
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
-import { LinkIcon } from '@heroicons/react/24/solid';
-import { useRouter } from 'next/navigation';
 
 const words = `A front-end developer who also revels in design. Enjoy the process of creating my own designed work into a functional product. Commit to developing a unique style website with a positive user experience. Prefer to experience new things and implement them.`;
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <main className='flex min-h-screen flex-col items-center justify-between bg-[#f3f3f3] p-16'>
       <div className='flex h-[730px] w-full  flex-col  justify-between border border-stone-700 p-5'>
@@ -19,32 +16,7 @@ export default function Home() {
           </div>
         </div>
         <div className='flex items-end gap-2 pb-3 pl-4'>
-          <div
-            className='flex cursor-pointer items-center'
-            onClick={() => {
-              router.push('https://github.com/FOR-Shu');
-            }}
-          >
-            <div className='rounded-full border border-stone-800 bg-stone-800 p-3'>
-              <LinkIcon className='size-6  text-white' />
-            </div>
-            <div className='rounded-3xl border border-stone-800 px-10 py-2 text-2xl font-bold'>
-              GITHUB
-            </div>
-          </div>
-          <div
-            className='flex cursor-pointer items-center'
-            onClick={() => {
-              router.push('https://github.com/FOR-Shu');
-            }}
-          >
-            <div className='rounded-full border border-stone-800 bg-stone-800 p-3'>
-              <LinkIcon className='size-6  text-white' />
-            </div>
-            <div className='rounded-3xl border border-stone-800 px-10 py-2 text-2xl font-bold'>
-              GITHUB
-            </div>
-          </div>
+          <Link />
         </div>
       </div>
       <div className='w-full text-xs'>
