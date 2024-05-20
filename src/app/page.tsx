@@ -1,6 +1,6 @@
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 import { LinkIcon } from '@heroicons/react/24/solid';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const words = `A front-end developer who also revels in design. Enjoy the process of creating my own designed work into a functional product. Commit to developing a unique style website with a positive user experience. Prefer to experience new things and implement them.`;
 
