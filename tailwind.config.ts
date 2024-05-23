@@ -16,6 +16,8 @@ const config: Config = {
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
         playFairDisplay: ['var(--font-playFairDisplay)'],
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)'],
       },
     },
   },

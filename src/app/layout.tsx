@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat, Playfair_Display } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 
 const montserrat = Montserrat({
@@ -27,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${montserrat.variable} ${playFairDisplay.variable} font-sans`}
+        className={`${montserrat.variable} ${playFairDisplay.variable} ${GeistSans.variable} ${GeistMono.variable}`}
       >
         {children}
       </body>
