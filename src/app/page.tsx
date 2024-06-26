@@ -1,26 +1,30 @@
-import { Link } from '@/components/link';
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
-
-const words = `A front-end developer who also revels in design. Enjoy the process of creating my own designed work into a functional product. Commit to developing a unique style website with a positive user experience. Prefer to experience new things and implement them.`;
+import { Mail, Github, Linkedin } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className='stop-scrolling flex min-h-screen flex-col items-center justify-between bg-[#f3f3f3] p-10 font-sans'>
-      <div className='flex h-[100%] w-full flex-col justify-between border border-stone-700 p-3'>
-        <div className='flex flex-col items-end'>
-          <div className='pr-5 font-playFairDisplay text-6xl font-black'>
-            Shuyuan Chuang
+    <main className='flex min-h-screen w-full items-center justify-center bg-[#f3f3f3] p-10 font-sans'>
+      <div className='flex flex-col items-center gap-5'>
+        <div className='text-2xl font-bold'>網站維修中...⸜(๑˙ᵕ ˙๑)⸝</div>
+        <div className='flex justify-center gap-1'>
+          <div className='cursor-pointer p-2 duration-300 hover:text-stone-500'>
+            <a href='mailto: shuyuan010829@gmail.com'>
+              <Mail />
+            </a>
           </div>
-          <div className='w-[50%] pr-5 pt-2 text-end'>
-            <TextGenerateEffect words={words} />
+          <div className='cursor-pointer p-2 duration-300 hover:text-stone-500'>
+            <a href='https://github.com/SHUSHU010829' target='_blank'>
+              <Github />
+            </a>
+          </div>
+          <div className='cursor-pointer p-2 duration-300 hover:text-stone-500'>
+            <a href='https://www.linkedin.com/in/shuyuanchuang' target='_blank'>
+              <Linkedin />
+            </a>
           </div>
         </div>
-        <div className='flex items-end gap-2 pb-3 pl-4'>
-          <Link />
+        <div className='text-xs'>
+          © <span className='font-bold'>2024</span> Shuyuan Chuang
         </div>
-      </div>
-      <div className='w-full text-xs'>
-        © <span className='font-bold'>2024</span> Build by NextJS & TailwindCss
       </div>
     </main>
   );

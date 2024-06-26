@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { LinkIcon } from '@heroicons/react/24/solid';
 
 export const Link = () => {
   const router = useRouter();
@@ -11,11 +10,11 @@ export const Link = () => {
       <div
         className='flex cursor-pointer items-center'
         onClick={() => {
-          router.push('https://github.com/FOR-Shu');
+          router.push('https://github.com/SHUSHU010829');
         }}
       >
         <div className='rounded-full border border-stone-800 bg-stone-800 p-3'>
-          <LinkIcon className='size-6  text-white' />
+          {/* <LinkIcon className='size-6  text-white' /> */}
         </div>
         <div className='rounded-3xl border border-stone-800 px-10 py-2 text-2xl font-bold'>
           GITHUB
@@ -24,11 +23,11 @@ export const Link = () => {
       <div
         className='flex cursor-pointer items-center'
         onClick={() => {
-          router.push('https://github.com/FOR-Shu');
+          router.push('https://github.com/SHUSHU010829');
         }}
       >
         <div className='rounded-full border border-stone-800 bg-stone-800 p-3'>
-          <LinkIcon className='size-6  text-white' />
+          {/* <LinkIcon className='size-6  text-white' /> */}
         </div>
         <div className='rounded-3xl border border-stone-800 px-10 py-2 text-2xl font-bold'>
           GITHUB
