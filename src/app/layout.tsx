@@ -28,6 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        <script
+          defer
+          data-domain='shuyuanchuang.com'
+          src='https://shuplausible.zeabur.app/js/script.js'
+        ></script>
+      </head>
       <body
         className={`${montserrat.variable} ${playFairDisplay.variable} ${GeistSans.variable} ${GeistMono.variable}`}
       >
