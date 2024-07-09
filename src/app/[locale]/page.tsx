@@ -32,7 +32,10 @@ export default function IndexPage({ params }: { params: { locale: string } }) {
             </a>
           </div>
           <Link href={`/${locale}/resume`}>
-            <GetStartedButton text='See Resume' className='font-montserrat' />
+            <GetStartedButton
+              text='See Resume'
+              className='font-montserrat text-black'
+            />
           </Link>
         </div>
         <div className='text-xs'>
