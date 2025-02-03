@@ -54,10 +54,11 @@ export default function Home() {
 
   return (
     <main className='flex flex-col bg-[#f3f3f3] p-10 font-sans'>
-      <article className='entry heti'>
+      <article className='entry heti px-0 md:px-20'>
         <h1>{t('name')}</h1>
         <p>噗噗</p>
       </article>
+      {/* TODO 我想要 */}
       <Dock direction='middle'>
         {DATA.navbar.map(item => (
           <DockIcon key={item.href}>

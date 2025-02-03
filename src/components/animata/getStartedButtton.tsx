@@ -14,7 +14,7 @@ export default function GetStartedButton({
     <div className='min-h-12 w-48'>
       <button
         className={cn(
-          'group flex h-12 w-40 items-center justify-center gap-3 rounded-lg bg-slate-100 p-2 font-bold transition-colors duration-100 ease-in-out hover:bg-stone-900',
+          'group flex h-12 w-40 items-center justify-center gap-3 rounded-lg bg-slate-100 p-2 font-bold transition-colors duration-200 ease-in-out hover:bg-stone-900',
           className
         )}
       >
