@@ -1,0 +1,50 @@
+---
+title: "Getting Started with Next.js and TypeScript"
+description: "Learn how to build a modern web application with Next.js and TypeScript"
+date: "2024-01-15"
+tags: ["Next.js", "TypeScript", "React"]
+published: true
+---
+
+# Getting Started with Next.js and TypeScript
+
+Next.js has become one of the most popular frameworks for building React applications, and when combined with TypeScript, it provides an incredible developer experience with type safety and modern features.
+
+## Why Next.js?
+
+Next.js offers several advantages:
+
+- **Server-side rendering** (SSR) out of the box
+- **Static site generation** (SSG) for better performance
+- **API routes** for full-stack applications
+- **Automatic code splitting** for optimized loading
+
+## Setting up TypeScript
+
+Setting up TypeScript with Next.js is incredibly simple. Just create a `tsconfig.json` file and Next.js will automatically configure everything for you.
+
+```bash
+npx create-next-app@latest my-app --typescript
+```
+
+## Example Component
+
+Here's a simple TypeScript component:
+
+```tsx
+interface Props {
+  title: string;
+  description?: string;
+}
+
+export function Card({ title, description }: Props) {
+  return (
+    <div className="card">
+      <h3>{title}</h3>
+      {description && <p>{description}</p>}
+    </div>
+  );
+}
+```
+
+This combination of Next.js and TypeScript provides an excellent foundation for building modern web applications.

@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "subtitle": "Full-stack Developer",
+    "description": "I create modern web applications with passion for clean code and beautiful user experiences."
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I'm a passionate developer with experience in modern web technologies. I love creating efficient, scalable, and user-friendly applications.",
+    "skills": "Skills"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "viewProject": "View Project",
+    "viewCode": "View Code"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "I'm always open to discussing new opportunities and interesting projects.",
+    "email": "Email",
+    "social": "Social"
+  },
+  "blog": {
+    "title": "Blog",
+    "latest": "Latest Posts",
+    "readMore": "Read More",
+    "backToBlog": "Back to Blog",
+    "publishedOn": "Published on"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}
