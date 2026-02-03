@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  /* Font Families */
+  --font-family-jetbrains: var(--font-jetbrains), monospace;
+  --font-family-ibm-plex: var(--font-ibm-plex), monospace;
+
+  --font-family-mono: var(--font-jetbrains), var(--font-ibm-plex), monospace;
+  --font-family-primary: var(--font-jetbrains), monospace;
+  --font-family-secondary: var(--font-ibm-plex), monospace;
+
+  /* Border Radius */
+  --radius-none: 0px;
+  --radius-m: 16px;
+  --radius-pill: 999px;
+
+  /* Base Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Theme Colors */
+  --color-background: light-dark(#f2f3f0, #111111);
+  --color-foreground: light-dark(#111111, #ffffff);
+
+  --color-primary: #10b981;
+  --color-primary-foreground: #0a0a0a;
+
+  --color-secondary: light-dark(#e7e8e5, #2e2e2e);
+  --color-secondary-foreground: light-dark(#111111, #ffffff);
+
+  --color-accent: light-dark(#f2f3f0, #111111);
+  --color-accent-foreground: light-dark(#111111, #f2f3f0);
+
+  --color-muted: light-dark(#f2f3f0, #2e2e2e);
+  --color-muted-foreground: light-dark(#666666, #b8b9b6);
+
+  --color-card: light-dark(#ffffff, #1a1a1a);
+  --color-card-foreground: light-dark(#111111, #ffffff);
+
+  --color-popover: light-dark(#ffffff, #1a1a1a);
+  --color-popover-foreground: light-dark(#111111, #ffffff);
+
+  --color-border: light-dark(#cbccc9, #2e2e2e);
+  --color-input: light-dark(#cbccc9, #2e2e2e);
+  --color-ring: #666666;
+
+  /* Sidebar Colors */
+  --color-sidebar: light-dark(#e7e8e5, #18181b);
+  --color-sidebar-foreground: light-dark(#666666, #fafafa);
+  --color-sidebar-primary: #18181b;
+  --color-sidebar-primary-foreground: #fafafa;
+  --color-sidebar-accent: light-dark(#cbccc9, #2a2a30);
+  --color-sidebar-accent-foreground: light-dark(#18181b, #fafafa);
+  --color-sidebar-border: light-dark(#cbccc9, #ffffff1a);
+  --color-sidebar-ring: #71717a;
+
+  /* Status Colors */
+  --color-info: light-dark(#dfdfe6, #222229);
+  --color-info-foreground: light-dark(#000066, #b2b2ff);
+
+  --color-success: light-dark(#dfe6e1, #222924);
+  --color-success-foreground: light-dark(#004d1a, #b6ffce);
+
+  --color-warning: light-dark(#e9e3d8, #291c0f);
+  --color-warning-foreground: light-dark(#804200, #ff8400);
+
+  --color-error: light-dark(#e5dcda, #24100b);
+  --color-error-foreground: light-dark(#8c1c00, #ff5c33);
+
+  --color-destructive: light-dark(#d93c15, #ff5c33);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    font-family: var(--font-ibm-plex), monospace;
+  }
+}
