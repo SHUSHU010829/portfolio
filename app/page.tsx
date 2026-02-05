@@ -5,7 +5,7 @@ import SocialLinks from "@/components/SocialLinks";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
-import Certifications from "@/components/Certifications";
+// import Certifications from "@/components/Certifications";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
         <About />
         <Experience />
         <Projects />
-        <Certifications />
+        {/* <Certifications /> */}
       </main>
       <Footer />
     </div>

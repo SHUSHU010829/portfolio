@@ -16,8 +16,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "$ shu/dev",
-  description: "Developer | Designer | Creator",
+  title: "shu/dev",
+  description: "A portfolio website about Shu.",
 };
 
 export default function RootLayout({

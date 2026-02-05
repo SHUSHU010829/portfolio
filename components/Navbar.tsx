@@ -4,11 +4,22 @@ import { Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      return (savedTheme as "light" | "dark") || "dark";
+    }
+    return "dark";
+  });
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.style.colorScheme = theme;
+    try {
+      const root = document.documentElement;
+      root.style.colorScheme = theme;
+      localStorage.setItem("theme", theme);
+    } catch (error) {
+      console.error("Failed to persist theme:", error);
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -32,13 +43,13 @@ export default function Navbar() {
         </div>
         <button
           onClick={toggleTheme}
-          className="flex h-10 w-10 items-center justify-center text-foreground transition-colors hover:bg-secondary"
+          className="flex h-8 w-8 items-center justify-center text-foreground transition-colors hover:bg-secondary rounded"
           aria-label="Toggle theme"
         >
           {theme === "dark" ? (
-            <Sun className="h-5 w-5" />
+            <Sun className="h-4 w-4" />
           ) : (
-            <Moon className="h-5 w-5" />
+            <Moon className="h-4 w-4" />
           )}
         </button>
       </div>

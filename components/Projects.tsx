@@ -1,42 +1,43 @@
-import { Upload, Infinity, Link, ChevronDown, X } from "lucide-react";
+"use client";
+
+import { Upload, Link, ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
 
 export default function Projects() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
   const projects = [
     {
       icon: Upload,
-      title: "React Wheel Picker",
-      date: "05.2025 - ∞",
+      title: "DailyVal Social",
+      date: "10.2025 - ∞",
+      projectLink: "https://social.dailyval.com",
       description:
-        "iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support. / Backed by ▲Vercel OSS Program",
+        "A modern social platform designed for iOS App ecosystem with Apple CloudKit as backend storage solution. Features seamless iCloud integration, multi-language support, and responsive design.",
       features: [
-        "• 📱 Natural touch scrolling with smooth inertia effect",
-        "• 🖱 Mouse drag and scroll support for desktop",
-        "• 🔄 Infinite loop scrolling",
-        "• 🎨 Unstyled components for complete style customization",
-        "• ⚡ Easy installation via shadcn CLI",
+        "• 🔐 Apple CloudKit Integration - Native iOS ecosystem support",
+        "• 🌍 Internationalization - Multi-language interface",
+        "• 🎨 Modern UI/UX - Radix UI + Tailwind CSS design system",
+        "• 📱 Responsive Design - Perfect for desktop, tablet, and mobile",
+        "• 🌙 Dark Mode - System-level theme switching",
+        "• ⚡ Infinite Scroll - Smooth content loading experience",
       ],
       technologies: [
-        ["Open Source", "React", "TypeScript", "Monorepo", "Turborepo", "pnpm-workspace", "Package Publishing"],
-        ["NPM Registry", "GitHub Actions"],
+        ["Next.js", "TypeScript", "React", "Apple CloudKit"],
+        ["Tailwind CSS", "Radix UI", "Framer Motion"],
       ],
-      expanded: true,
-    },
-    {
-      icon: Infinity,
-      title: "chanhdai.com",
-      date: "01.2025 - ∞",
-      expanded: false,
     },
   ];
 
+  const toggleExpand = (idx: number) => {
+    setExpandedIndex(expandedIndex === idx ? null : idx);
+  };
+
   return (
     <section className="flex w-full flex-col gap-4">
-      <div className="flex items-end gap-1">
-        <h3 className="font-primary text-[32px] font-bold text-foreground">
-          Projects
-        </h3>
-        <span className="font-primary text-lg text-muted-foreground">(12)</span>
-      </div>
+      <h3 className="font-primary text-sm font-semibold text-primary">
+        {"//"} Projects
+      </h3>
       <div className="flex flex-col gap-4">
         {projects.map((project, idx) => (
           <div
@@ -58,15 +59,29 @@ export default function Projects() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <Link className="h-5 w-5 text-muted-foreground" />
-                {project.expanded ? (
-                  <X className="h-5 w-5 text-muted-foreground" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                )}
+                <a
+                  href={project.projectLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open project link"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <Link className="h-4 w-4" />
+                </a>
+                <button
+                  onClick={() => toggleExpand(idx)}
+                  className="cursor-pointer text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label="Toggle details"
+                >
+                  {expandedIndex === idx ? (
+                    <ChevronUp className="h-5 w-5" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5" />
+                  )}
+                </button>
               </div>
             </div>
-            {project.expanded && project.description && (
+            {expandedIndex === idx && project.description && (
               <>
                 <p className="font-secondary text-sm leading-relaxed text-muted-foreground">
                   {project.description}

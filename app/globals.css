@@ -89,3 +89,17 @@
     font-family: var(--font-ibm-plex), monospace;
   }
 }
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 4px #3b82f6;
+  }
+  50% {
+    box-shadow: 0 0 8px #3b82f6, 0 0 12px #3b82f6;
+  }
+}
+
+.status-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
