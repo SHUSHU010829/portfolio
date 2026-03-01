@@ -69,9 +69,9 @@ export default function Experience() {
         {"//"} Experience
       </h3>
       <div className="flex flex-col gap-4">
-        {experiences.map((exp, idx) => (
+        {experiences.map((exp) => (
           <div
-            key={idx}
+            key={exp.company}
             className="flex flex-col gap-4 border border-border bg-card p-6"
           >
             {/* Company name row */}
@@ -171,9 +171,9 @@ export default function Experience() {
               {Array.isArray(exp.technologies[0]) ? (
                 exp.technologies.map((row, rowIdx) => (
                   <div key={rowIdx} className="flex flex-wrap gap-2">
-                    {(row as string[]).map((tech, i) => (
+                    {(row as string[]).map((tech) => (
                       <span
-                        key={i}
+                        key={tech}
                         className="rounded border border-border bg-secondary px-3 py-1.5 font-primary text-xs text-foreground"
                       >
                         {tech}
@@ -183,9 +183,9 @@ export default function Experience() {
                 ))
               ) : (
                 <div className="flex flex-wrap gap-2">
-                  {(exp.technologies as string[]).map((tech, i) => (
+                  {(exp.technologies as string[]).map((tech) => (
                     <span
-                      key={i}
+                      key={tech}
                       className="rounded border border-border bg-secondary px-3 py-1.5 font-primary text-xs text-foreground"
                     >
                       {tech}

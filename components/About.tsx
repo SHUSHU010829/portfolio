@@ -13,6 +13,7 @@ export default function About() {
           problems. I specialize in full-stack development with a keen eye for
           design and user experience.
         </p>
+
       </div>
     </section>
   );

@@ -25,9 +25,9 @@ export default function Certifications() {
         {"//"} Certifications
       </h3>
       <div className="flex flex-col gap-4">
-        {certifications.map((cert, idx) => (
+        {certifications.map((cert) => (
           <div
-            key={idx}
+            key={cert.title}
             className="flex items-center gap-4 border border-border bg-card p-5"
           >
             <div

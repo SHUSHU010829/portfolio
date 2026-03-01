@@ -39,9 +39,9 @@ export default function Projects() {
         {"//"} Projects
       </h3>
       <div className="flex flex-col gap-4">
-        {projects.map((project, idx) => (
+        {projects.map((project) => (
           <div
-            key={idx}
+            key={project.title}
             className="flex flex-col gap-6 border border-border bg-card p-6"
           >
             <div className="flex items-center justify-between">
@@ -88,9 +88,9 @@ export default function Projects() {
                 </p>
                 {project.features && (
                   <div className="flex flex-col gap-3">
-                    {project.features.map((feature, i) => (
+                    {project.features.map((feature) => (
                       <p
-                        key={i}
+                        key={feature}
                         className="font-secondary text-sm text-muted-foreground"
                       >
                         {feature}
@@ -102,9 +102,9 @@ export default function Projects() {
                   <div className="flex flex-col gap-2">
                     {project.technologies.map((row, rowIdx) => (
                       <div key={rowIdx} className="flex flex-wrap gap-2">
-                        {row.map((tech, i) => (
+                        {row.map((tech) => (
                           <span
-                            key={i}
+                            key={tech}
                             className="rounded-full border border-border bg-secondary px-3 py-1.5 font-primary text-xs text-muted-foreground"
                           >
                             {tech}
