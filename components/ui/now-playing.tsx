@@ -36,8 +36,8 @@ export function NowPlaying() {
   // Loading state — keep same layout width to avoid shift
   if (data === null) {
     return (
-      <div className="flex items-center gap-2">
-        <div className="h-2 w-2 rounded-full bg-muted-foreground/40 animate-pulse" />
+      <div className="flex min-w-0 items-center gap-2">
+        <div className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground/40 animate-pulse" />
         <span className="font-primary text-sm text-muted-foreground">
           Loading…
         </span>
@@ -47,8 +47,8 @@ export function NowPlaying() {
 
   if (!data.isPlaying) {
     return (
-      <div className="flex items-center gap-2">
-        <div className="h-2 w-2 rounded-full bg-muted-foreground/50" />
+      <div className="flex min-w-0 items-center gap-2">
+        <div className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground/50" />
         <span className="font-primary text-sm text-muted-foreground">
           Not Playing
         </span>
@@ -57,20 +57,22 @@ export function NowPlaying() {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="h-2 w-2 rounded-full bg-[#22c55e]" />
-      <span className="font-primary text-sm text-muted-foreground">
+    <div className="flex min-w-0 items-center gap-2">
+      <div className="h-2 w-2 shrink-0 rounded-full bg-[#22c55e]" />
+      {/* "Now Playing" label — hidden on mobile to save space */}
+      <span className="hidden shrink-0 font-primary text-sm text-muted-foreground sm:inline">
         Now Playing
       </span>
       <a
         href={data.songUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="font-primary text-sm font-medium text-primary hover:underline"
+        className="truncate font-primary text-sm font-medium text-primary hover:underline"
       >
         {data.title}
       </a>
-      <span className="font-primary text-sm text-muted-foreground">
+      {/* Artist — hidden on mobile */}
+      <span className="hidden shrink-0 font-primary text-sm text-muted-foreground sm:inline">
         — {data.artist}
       </span>
     </div>
