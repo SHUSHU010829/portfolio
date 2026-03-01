@@ -39,7 +39,7 @@ export default function Projects() {
         {"//"} Projects
       </h3>
       <div className="flex flex-col gap-4">
-        {projects.map((project) => (
+        {projects.map((project, idx) => (
           <div
             key={project.title}
             className="flex flex-col gap-6 border border-border bg-card p-6"

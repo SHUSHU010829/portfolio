@@ -69,7 +69,7 @@ export default function Experience() {
         {"//"} Experience
       </h3>
       <div className="flex flex-col gap-4">
-        {experiences.map((exp) => (
+        {experiences.map((exp, idx) => (
           <div
             key={exp.company}
             className="flex flex-col gap-4 border border-border bg-card p-6"

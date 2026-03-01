@@ -70,6 +70,12 @@
   --color-destructive: light-dark(#d93c15, #ff5c33);
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
