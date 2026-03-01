@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { NowPlaying } from "@/components/ui/now-playing";
 
 export default function Navbar() {
   return (
@@ -9,15 +10,7 @@ export default function Navbar() {
         $ shu/dev
       </h1>
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-[#22c55e]" />
-          <span className="font-primary text-sm text-muted-foreground">
-            Now Playing
-          </span>
-          <span className="font-primary text-sm font-medium text-primary">
-            Lofi Beats
-          </span>
-        </div>
+        <NowPlaying />
         <AnimatedThemeToggler
           className="flex h-8 w-8 items-center justify-center text-foreground transition-colors hover:bg-secondary rounded"
           aria-label="Toggle theme"
