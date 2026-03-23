@@ -69,8 +69,15 @@
 
   --color-destructive: light-dark(#d93c15, #ff5c33);
 
-  /* Animations */
+  /* Status Colors */
+  --color-status-active: light-dark(#22c55e, #22c55e);
+  --color-status-indicator: light-dark(#3b82f6, #3b82f6);
+
+  /* Animations & Transitions */
   --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-slow: 300ms;
 }
 
 ::view-transition-old(root),
@@ -122,4 +129,16 @@
 
 .status-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

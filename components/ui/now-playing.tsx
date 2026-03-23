@@ -16,12 +16,26 @@ export function NowPlaying() {
 
     async function fetchNowPlaying() {
       try {
-        const res = await fetch("/api/spotify");
-        if (!res.ok) throw new Error("fetch failed");
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
+        const res = await fetch("/api/spotify", {
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        }
         const json: NowPlayingData = await res.json();
-        if (!cancelled) setData(json);
-      } catch {
-        if (!cancelled) setData({ isPlaying: false });
+        if (!cancelled) {
+          setData(json);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.warn("Failed to fetch Spotify status:", error);
+          setData({ isPlaying: false });
+        }
       }
     }
 
@@ -36,7 +50,7 @@ export function NowPlaying() {
   // Loading state — keep same layout width to avoid shift
   if (data === null) {
     return (
-      <div className="flex min-w-0 items-center gap-2">
+      <div className="flex min-w-0 items-center gap-2" aria-live="polite" aria-atomic="true">
         <div className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground/40 animate-pulse" />
         <span className="font-primary text-sm text-muted-foreground">
           Loading…
@@ -47,7 +61,7 @@ export function NowPlaying() {
 
   if (!data.isPlaying) {
     return (
-      <div className="flex min-w-0 items-center gap-2">
+      <div className="flex min-w-0 items-center gap-2" aria-live="polite" aria-atomic="true">
         <div className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground/50" />
         <span className="font-primary text-sm text-muted-foreground">
           Not Playing
@@ -57,8 +71,8 @@ export function NowPlaying() {
   }
 
   return (
-    <div className="flex min-w-0 items-center gap-2">
-      <div className="h-2 w-2 shrink-0 rounded-full bg-[#22c55e]" />
+    <div className="flex min-w-0 items-center gap-2" aria-live="polite" aria-atomic="true">
+      <div className="h-2 w-2 shrink-0 rounded-full bg-status-active" />
       {/* "Now Playing" label — hidden on mobile to save space */}
       <span className="hidden shrink-0 font-primary text-sm text-muted-foreground sm:inline">
         Now Playing

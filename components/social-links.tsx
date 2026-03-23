@@ -22,7 +22,7 @@ export default function SocialLinks() {
           <a
             key={link.label}
             href={link.href}
-            className="flex h-10 items-center gap-3 border border-border bg-card px-5 transition-colors hover:bg-secondary"
+            className="flex h-10 items-center gap-3 border border-border bg-card px-5 transition-all duration-200 hover:bg-secondary hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
           >
             <link.icon className="h-4 w-4 text-foreground" />
             <span className="font-secondary text-sm text-foreground">
