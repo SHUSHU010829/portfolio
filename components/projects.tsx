@@ -63,8 +63,8 @@ export default function Projects() {
                   href={project.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  title="Open project link"
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={`Open ${project.title} project link`}
+                  className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
                 >
                   <Link className="h-4 w-4" />
                 </a>

@@ -62,8 +62,22 @@ export function TypingAnimation({
 
   const shouldStart = startOnView ? isInView : true;
 
+  // Honor prefers-reduced-motion
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   useEffect(() => {
     if (!shouldStart || wordsToAnimate.length === 0) return;
+
+    // If user prefers reduced motion, instantly show the final text
+    if (prefersReducedMotion) {
+      const finalText = wordsToAnimate[wordsToAnimate.length - 1] || "";
+      setDisplayedText(finalText);
+      setCurrentCharIndex(Array.from(finalText).length);
+      setPhase("typing");
+      return;
+    }
 
     const timeoutDelay =
       delay > 0 && displayedText === ""

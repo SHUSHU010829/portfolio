@@ -67,7 +67,8 @@ export function NowPlaying() {
         href={data.songUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="truncate font-primary text-sm font-medium text-primary hover:underline"
+        aria-label={`Now playing: ${data.title} by ${data.artist}`}
+        className="truncate font-primary text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 rounded-sm"
       >
         {data.title}
       </a>

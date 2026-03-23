@@ -77,20 +77,19 @@ export default function Experience() {
             {/* Company name row */}
             <div className="flex items-center gap-3">
               <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-foreground p-1">
-                <div className="relative h-full w-full">
-                  <Image
-                    src={exp.logo}
-                    alt={exp.company}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+                <Image
+                  src={exp.logo}
+                  alt={exp.company}
+                  width={24}
+                  height={24}
+                  className="object-contain"
+                />
               </div>
               <Link
                 href={exp.companyLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-primary font-semibold text-foreground transition-colors hover:text-primary"
+                className="font-primary font-semibold text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
               >
                 {exp.company}
               </Link>
