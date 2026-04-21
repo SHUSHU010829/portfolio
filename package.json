@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "resume:build": "typst compile --root . resume/resume.typ resume/resume.pdf && cp resume/resume.pdf public/resume.pdf",
+    "resume:watch": "typst watch --root . resume/resume.typ resume/resume.pdf"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",

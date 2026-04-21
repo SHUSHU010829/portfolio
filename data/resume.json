@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "2026-04-21",
+    "note": "Single source of truth for resume data. Used by both the portfolio website and the Typst PDF template."
+  },
+  "basics": {
+    "name": "Shu-Yuan Chuang",
+    "nameZh": "莊舒媛",
+    "nickname": "SHUSHU",
+    "title": "Full-Stack Engineer",
+    "location": "Taipei, Taiwan",
+    "locationTimezone": "Asia/Taipei",
+    "email": "shuyuan010829@gmail.com",
+    "portfolio": "https://shuyuan.dev",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "SHUSHU010829",
+        "url": "https://github.com/SHUSHU010829"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "shuyuanchuang",
+        "url": "https://www.linkedin.com/in/shuyuanchuang"
+      },
+      {
+        "network": "Twitter",
+        "username": "shuyuan010829",
+        "url": "https://x.com/shuyuan010829"
+      }
+    ]
+  },
+  "summary": "Full-stack engineer with 3+ years shipping production FinTech end-to-end. Built two 0-to-1 SaaS platforms at Relianz (Easytax + business registration) now serving 100+ enterprise subscribers and 500+ SMB clients. Stack: React, TypeScript, Next.js, Go. Owns features from schema design and API contracts to interaction detail and E2E tests.",
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "React Native"
+      ]
+    },
+    {
+      "category": "Backend",
+      "items": ["Go", "Node.js", "PostgreSQL", "RESTful API", "SSE"]
+    },
+    {
+      "category": "Testing & AI",
+      "items": [
+        "Playwright",
+        "Vitest",
+        "Jest",
+        "Claude Code",
+        "Spec-Driven Development (SDD)",
+        "Apidog"
+      ]
+    },
+    {
+      "category": "Tools",
+      "items": ["Git", "Figma", "Vercel", "Google Cloud", "PM2", "Ubuntu"]
+    },
+    {
+      "category": "Languages",
+      "items": ["Mandarin (native)", "English (conversational)"]
+    }
+  ],
+  "experience": [
+    {
+      "id": "relianz",
+      "company": "Relianz",
+      "companyZh": "友信創新",
+      "companyUrl": "https://relianz.tw/",
+      "logo": "/relianz.png",
+      "role": "Frontend Engineer",
+      "employmentType": "Full-time",
+      "startDate": "2023-09",
+      "endDate": null,
+      "location": "Taipei, Taiwan",
+      "showStatus": true,
+      "subtitle": "FinTech SaaS platforms for business registration and cloud accounting (Easytax)",
+      "highlights": [
+        "Built two SaaS products from 0 to 1 alongside matching admin back-offices, then became sole frontend owner after the first year — now serving 100+ enterprise Easytax subscribers and 500+ business registration clients",
+        "Designed and built a precision tax calculation engine for voucher logging, salary slips, and labor payment forms feeding downstream tax filings",
+        "Delivered full-stack subscription payment flow with Go + ECPay, turning Easytax into a recurring-revenue product",
+        "Introduced a Spec-Driven Development workflow with Claude Code, incrementally refactoring legacy code into a layered architecture (Logic / Validation / UI / Service) during feature work",
+        "Established E2E testing with Playwright and bilingual component documentation, adopted as team standards"
+      ],
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "React",
+        "Go",
+        "Tailwind CSS",
+        "Playwright",
+        "AI-driven Development"
+      ]
+    },
+    {
+      "id": "dailyval",
+      "company": "DailyVal",
+      "companyUrl": "https://dailyval.com",
+      "logo": null,
+      "role": "Frontend Contractor",
+      "employmentType": "Contract",
+      "startDate": "2025-10",
+      "endDate": null,
+      "location": "Remote",
+      "showStatus": true,
+      "subtitle": "Web presence for DailyVal, a Valorant community iOS app with 1M+ downloads",
+      "highlights": [
+        "Designed and shipped social.dailyval.com end-to-end, extending the native iOS community to the web via Apple CloudKit as the backend of record",
+        "Following the launch, was trusted to take over the main dailyval.com marketing site and rebuild it from the ground up",
+        "Implemented i18n multi-language support, infinite scroll, and system-synced dark mode as the sole web engineer on both properties"
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Apple CloudKit",
+        "Radix UI",
+        "Framer Motion"
+      ]
+    },
+    {
+      "id": "softmobile",
+      "company": "SoftMobile Technology Corporation",
+      "companyZh": "精誠隨想",
+      "companyUrl": "https://www.softmobile.com.tw/",
+      "logo": "/softmobile.png",
+      "role": "Frontend Intern",
+      "employmentType": "Full-time",
+      "startDate": "2022-07",
+      "endDate": "2023-08",
+      "location": "Taipei, Taiwan",
+      "showStatus": false,
+      "subtitle": null,
+      "highlights": [
+        "Revamped account management and testing systems; built cross-platform mobile apps with React Native serving Android and iOS from a shared codebase",
+        "Managed application state with Redux and React Hooks; integrated RESTful APIs across web and mobile clients"
+      ],
+      "technologies": ["React Native", "Redux", "React Hooks", "RESTful API"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "dailyval-social",
+      "name": "DailyVal Social",
+      "url": "https://social.dailyval.com",
+      "startDate": "2025-10",
+      "endDate": null,
+      "tagline": "A modern social platform for the DailyVal iOS ecosystem",
+      "description": "A modern social platform designed for iOS App ecosystem with Apple CloudKit as backend storage solution. Features seamless iCloud integration, multi-language support, and responsive design.",
+      "features": [
+        "Apple CloudKit Integration - Native iOS ecosystem support",
+        "Internationalization - Multi-language interface",
+        "Modern UI/UX - Radix UI + Tailwind CSS design system",
+        "Responsive Design - Perfect for desktop, tablet, and mobile",
+        "Dark Mode - System-level theme switching",
+        "Infinite Scroll - Smooth content loading experience"
+      ],
+      "technologies": [
+        ["Next.js", "TypeScript", "React", "Apple CloudKit"],
+        ["Tailwind CSS", "Radix UI", "Framer Motion"]
+      ],
+      "showOnWebsite": true,
+      "showOnResume": false,
+      "relatedExperienceId": "dailyval"
+    }
+  ],
+  "education": [
+    {
+      "id": "feng-chia",
+      "institution": "Feng Chia University",
+      "institutionZh": "逢甲大學",
+      "degree": "B.S. in Engineering and Computer Science",
+      "startDate": "2019-09",
+      "endDate": "2023-06",
+      "location": "Taichung, Taiwan",
+      "highlights": [
+        "GPA: 4.1 / 4.3",
+        "Vice Director of iOSClub — ran weekly workshops teaching Swift Playgrounds and SwiftUI fundamentals",
+        "Teaching Assistant, iOS App Programming course (Sep 2021 – Dec 2021)"
+      ]
+    }
+  ]
+}
