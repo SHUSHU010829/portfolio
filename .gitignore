@@ -47,3 +47,5 @@ next-env.d.ts
 pnpm-lock.yaml
 portfolio.pen
 .claude/
+.spectra/
+openspec/.vector-search.db*

@@ -1,91 +1,189 @@
 @import "tailwindcss";
 
-@theme {
-  /* Font Families */
-  --font-family-jetbrains: var(--font-jetbrains), monospace;
-  --font-family-ibm-plex: var(--font-ibm-plex), monospace;
+/* ============================================================
+   Design Tokens — OKLCH Color System
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --color-bg:           oklch(0.12 0 0);
+  --color-bg-elevated:  oklch(0.16 0 0);
+  --color-bg-overlay:   oklch(0.18 0 0);
 
-  --font-family-mono: var(--font-jetbrains), var(--font-ibm-plex), monospace;
-  --font-family-primary: var(--font-jetbrains), monospace;
+  /* Borders */
+  --color-border:       oklch(0.22 0 0);
+  --color-border-hover: oklch(0.32 0 0);
+
+  /* Text */
+  --color-fg:           oklch(0.96 0 0);
+  --color-fg-muted:     oklch(0.68 0 0);
+  --color-fg-subtle:    oklch(0.45 0 0);
+
+  /* Accent (terminal green) */
+  --color-accent:       oklch(0.78 0.18 155);
+  --color-accent-hover: oklch(0.85 0.18 155);
+  --color-accent-dim:   oklch(0.78 0.18 155 / 0.15);
+
+  /* Semantic */
+  --color-success:      oklch(0.78 0.18 155);
+  --color-warning:      oklch(0.82 0.17 75);
+  --color-error:        oklch(0.68 0.22 25);
+
+  /* Syntax highlight */
+  --color-syntax-keyword:  oklch(0.75 0.15 340);
+  --color-syntax-string:   oklch(0.78 0.14 155);
+  --color-syntax-comment:  oklch(0.55 0.03 250);
+  --color-syntax-number:   oklch(0.80 0.14 75);
+
+  /* ============================================================
+     Motion Tokens
+     ============================================================ */
+  --duration-instant:  80ms;
+  --duration-fast:     120ms;
+  --duration-base:     160ms;
+  --duration-slow:     240ms;
+  --duration-slowest:  400ms;
+
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring:      cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+     Spacing Tokens (4px grid)
+     ============================================================ */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ============================================================
+     Typography Tokens
+     ============================================================ */
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'Menlo', monospace;
+  --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  2rem;
+  --text-3xl:  2.5rem;
+
+  /* ============================================================
+     Animations
+     ============================================================ */
+  --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+
+  /* Legacy compat (used by existing components, remove after full migration) */
+  --color-background:           var(--color-bg);
+  --color-foreground:           var(--color-fg);
+  --color-primary:              var(--color-accent);
+  --color-primary-foreground:   oklch(0.12 0 0);
+  --color-secondary:            var(--color-bg-elevated);
+  --color-secondary-foreground: var(--color-fg);
+  --color-muted:                var(--color-bg-elevated);
+  --color-muted-foreground:     var(--color-fg-muted);
+  --color-card:                 var(--color-bg-elevated);
+  --color-card-foreground:      var(--color-fg);
+  --color-border:               oklch(0.22 0 0);
+  --color-status-indicator:     oklch(0.65 0.18 250);
+}
+
+[data-theme="light"] {
+  --color-bg:           oklch(0.99 0 0);
+  --color-bg-elevated:  oklch(0.97 0 0);
+  --color-bg-overlay:   oklch(0.95 0 0);
+
+  --color-border:       oklch(0.88 0 0);
+  --color-border-hover: oklch(0.75 0 0);
+
+  --color-fg:           oklch(0.15 0 0);
+  --color-fg-muted:     oklch(0.45 0 0);
+  --color-fg-subtle:    oklch(0.60 0 0);
+
+  --color-accent:       oklch(0.58 0.18 155);
+  --color-accent-hover: oklch(0.52 0.18 155);
+  --color-accent-dim:   oklch(0.58 0.18 155 / 0.10);
+
+  /* Legacy compat overrides */
+  --color-background:           var(--color-bg);
+  --color-foreground:           var(--color-fg);
+  --color-primary:              var(--color-accent);
+  --color-secondary:            var(--color-bg-elevated);
+  --color-secondary-foreground: var(--color-fg);
+  --color-muted:                var(--color-bg-elevated);
+  --color-muted-foreground:     var(--color-fg-muted);
+  --color-card:                 var(--color-bg-elevated);
+  --color-card-foreground:      var(--color-fg);
+  --color-border:               oklch(0.88 0 0);
+}
+
+/* ============================================================
+   Tailwind v4 @theme — expose tokens as utility classes
+   ============================================================ */
+@theme {
+  /* Font families */
+  --font-family-mono: var(--font-geist-mono), 'JetBrains Mono', 'Menlo', monospace;
+  --font-family-sans: var(--font-geist), system-ui, sans-serif;
+  /* Legacy font aliases */
+  --font-family-jetbrains: var(--font-jetbrains), monospace;
+  --font-family-ibm-plex:  var(--font-ibm-plex), monospace;
+  --font-family-primary:   var(--font-jetbrains), monospace;
   --font-family-secondary: var(--font-ibm-plex), monospace;
+
+  /* Color utilities */
+  --color-bg:           var(--color-bg);
+  --color-bg-elevated:  var(--color-bg-elevated);
+  --color-bg-overlay:   var(--color-bg-overlay);
+  --color-border:       var(--color-border);
+  --color-border-hover: var(--color-border-hover);
+  --color-fg:           var(--color-fg);
+  --color-fg-muted:     var(--color-fg-muted);
+  --color-fg-subtle:    var(--color-fg-subtle);
+  --color-accent:       var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-dim:   var(--color-accent-dim);
+
+  /* Legacy color aliases for existing components */
+  --color-background:           var(--color-background);
+  --color-foreground:           var(--color-foreground);
+  --color-primary:              var(--color-primary);
+  --color-primary-foreground:   var(--color-primary-foreground);
+  --color-secondary:            var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-muted:                var(--color-muted);
+  --color-muted-foreground:     var(--color-muted-foreground);
+  --color-card:                 var(--color-card);
+  --color-card-foreground:      var(--color-card-foreground);
+  --color-status-indicator:     var(--color-status-indicator);
 
   /* Border Radius */
   --radius-none: 0px;
   --radius-m: 16px;
   --radius-pill: 999px;
 
-  /* Base Colors */
-  --color-black: #000000;
-  --color-white: #ffffff;
-
-  /* Theme Colors */
-  --color-background: light-dark(#f2f3f0, #111111);
-  --color-foreground: light-dark(#111111, #ffffff);
-
-  --color-primary: #10b981;
-  --color-primary-foreground: #0a0a0a;
-
-  --color-secondary: light-dark(#e7e8e5, #2e2e2e);
-  --color-secondary-foreground: light-dark(#111111, #ffffff);
-
-  --color-accent: light-dark(#f2f3f0, #111111);
-  --color-accent-foreground: light-dark(#111111, #f2f3f0);
-
-  --color-muted: light-dark(#f2f3f0, #2e2e2e);
-  --color-muted-foreground: light-dark(#666666, #b8b9b6);
-
-  --color-card: light-dark(#ffffff, #1a1a1a);
-  --color-card-foreground: light-dark(#111111, #ffffff);
-
-  --color-popover: light-dark(#ffffff, #1a1a1a);
-  --color-popover-foreground: light-dark(#111111, #ffffff);
-
-  --color-border: light-dark(#cbccc9, #2e2e2e);
-  --color-input: light-dark(#cbccc9, #2e2e2e);
-  --color-ring: #666666;
-
-  /* Sidebar Colors */
-  --color-sidebar: light-dark(#e7e8e5, #18181b);
-  --color-sidebar-foreground: light-dark(#666666, #fafafa);
-  --color-sidebar-primary: #18181b;
-  --color-sidebar-primary-foreground: #fafafa;
-  --color-sidebar-accent: light-dark(#cbccc9, #2a2a30);
-  --color-sidebar-accent-foreground: light-dark(#18181b, #fafafa);
-  --color-sidebar-border: light-dark(#cbccc9, #ffffff1a);
-  --color-sidebar-ring: #71717a;
-
-  /* Status Colors */
-  --color-info: light-dark(#dfdfe6, #222229);
-  --color-info-foreground: light-dark(#000066, #b2b2ff);
-
-  --color-success: light-dark(#dfe6e1, #222924);
-  --color-success-foreground: light-dark(#004d1a, #b6ffce);
-
-  --color-warning: light-dark(#e9e3d8, #291c0f);
-  --color-warning-foreground: light-dark(#804200, #ff8400);
-
-  --color-error: light-dark(#e5dcda, #24100b);
-  --color-error-foreground: light-dark(#8c1c00, #ff5c33);
-
-  --color-destructive: light-dark(#d93c15, #ff5c33);
-
-  /* Status Colors */
-  --color-status-active: light-dark(#22c55e, #22c55e);
-  --color-status-indicator: light-dark(#3b82f6, #3b82f6);
-
-  /* Animations & Transitions */
+  /* Animations */
   --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
-  --transition-duration-fast: 150ms;
-  --transition-duration-base: 200ms;
-  --transition-duration-slow: 300ms;
 }
 
+/* ============================================================
+   View Transitions
+   ============================================================ */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
+/* ============================================================
+   Base Styles
+   ============================================================ */
 @layer base {
   * {
     box-sizing: border-box;
@@ -100,42 +198,34 @@
   }
 
   body {
-    color: var(--color-foreground);
-    background-color: var(--color-background);
-    font-family: var(--font-ibm-plex), monospace;
+    color: var(--color-fg);
+    background-color: var(--color-bg);
+    font-family: var(--font-mono);
   }
 }
 
+/* ============================================================
+   Keyframes
+   ============================================================ */
 @keyframes blink-cursor {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
 @keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 4px #3b82f6;
-  }
-  50% {
-    box-shadow: 0 0 8px #3b82f6, 0 0 12px #3b82f6;
-  }
+  0%, 100% { box-shadow: 0 0 4px oklch(0.65 0.18 250); }
+  50%       { box-shadow: 0 0 8px oklch(0.65 0.18 250), 0 0 12px oklch(0.65 0.18 250); }
 }
 
 .status-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Respect user's motion preferences */
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

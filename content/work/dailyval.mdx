@@ -1,0 +1,66 @@
+---
+slug: dailyval
+title: "DailyVal Social"
+subtitle: "iOS-native social platform with Apple CloudKit backend"
+role: "Contractor / Full-stack"
+year: "2025"
+status: "published"
+order: 2
+stack: ["Next.js", "TypeScript", "Apple CloudKit", "Tailwind CSS", "Radix UI"]
+coverImage: "/images/dailyval/cover.png"
+description: "A modern social platform built for the Valorant community, powered by Apple's CloudKit as the backend storage solution."
+---
+
+## Context
+
+DailyVal Social is a community platform for Valorant players, designed to live within the Apple ecosystem. The client wanted a web companion app that felt native — syncing with the iOS app via Apple CloudKit.
+
+My role: contractor responsible for the entire Next.js web frontend, from architecture to deployment.
+
+## Process
+
+**Architecture decision: CloudKit Web Services**
+
+Apple CloudKit provides a public/private database accessible via a REST API from the browser. The challenge was that CloudKit's web APIs are designed for service-to-service use, not browser-direct calls — requiring careful token management.
+
+The final architecture:
+
+```
+iOS App → CloudKit (native SDK)
+Web App → Next.js API Route → CloudKit Web Services API
+```
+
+API routes acted as a thin proxy — handling authentication and transforming CloudKit's record format into clean JSON for the frontend.
+
+**Multi-language support:**
+
+Implemented `next-intl` with EN/ZH-TW/ZH-CN coverage. All strings live in JSON locale files, enabling future expansion without code changes.
+
+## Technical Highlights
+
+**Security vulnerability discovery:**
+
+During development I discovered that the original CloudKit token was being exposed in client-side JavaScript bundles. This would have allowed any user to read the private database directly.
+
+**Fix:**
+- Moved all CloudKit calls server-side (Next.js API routes + Server Components)
+- Rotated the exposed token immediately
+- Added environment variable validation at startup to fail fast if secrets are missing
+
+This is the kind of issue that's easy to miss when moving fast — and easy to prevent with a server-first architecture.
+
+**Infinite scroll implementation:**
+
+Used Intersection Observer API with `useInView` to trigger paginated CloudKit queries. No third-party library — about 40 lines of custom hook code.
+
+## Results
+
+- Launched to Valorant community on schedule
+- Zero CloudKit rate-limit incidents post-launch (careful batching of record fetches)
+- Bilingual interface supported from day one
+
+## Reflection
+
+CloudKit is an unusual backend choice for a web app — Apple designed it for native contexts. If I were starting today I'd evaluate whether a more web-native backend (Supabase, PlanetScale) would reduce friction. That said, the CloudKit constraint was a client requirement, and the proxy architecture works well.
+
+The security catch was a valuable lesson: always audit what's in your JS bundle before deploy.

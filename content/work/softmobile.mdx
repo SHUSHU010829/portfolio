@@ -1,0 +1,62 @@
+---
+slug: softmobile
+title: "SoftMobile Internship"
+subtitle: "React Native mobile development at a telecom software company"
+role: "Frontend Intern"
+year: "2022–2023"
+status: "published"
+order: 3
+stack: ["React Native", "Redux", "React", "RESTful API", "JavaScript"]
+coverImage: "/images/softmobile/cover.png"
+description: "13-month internship building iOS and Android applications with React Native at SoftMobile Technology Corporation."
+---
+
+## Context
+
+SoftMobile Technology Corporation provides software solutions for telecom operators. During this 13-month internship I joined a small frontend team working on both a web admin panel and two mobile applications (iOS + Android).
+
+This was my first professional programming role — transitioning from academic JavaScript to production React and React Native.
+
+## Process
+
+**Onboarding:**
+
+The codebase was a class-based React codebase being migrated to hooks. My first task was to understand Redux state management and contribute new features without breaking the existing patterns.
+
+**Mobile development:**
+
+After 3 months on the web panel I moved to React Native. The biggest learning curve: understanding that "React" and "React Native" share a mental model but diverge immediately in layout primitives.
+
+Key differences I learned:
+- Flexbox is the *only* layout model (no block/inline)
+- Styling is JS objects, not CSS strings — no cascade
+- Platform-specific code via `Platform.select()` or `.ios.js` / `.android.js` file suffixes
+- Navigation is fundamentally different — React Navigation vs web routing
+
+## Technical Highlights
+
+**State management with Redux:**
+
+Learned to structure Redux around feature slices before Redux Toolkit was mainstream. Hand-written action creators and reducers — verbose, but gave a deep understanding of the pattern.
+
+**Account management system:**
+
+Built an admin CRUD system for managing telecom subscriber accounts. Key challenge: handling optimistic UI updates where the API response was slow (3-5s) but the UI needed to feel instant.
+
+Solution: update local Redux state immediately on action, then reconcile with server response. Handle errors by rolling back the optimistic update.
+
+**Testing system:**
+
+Wrote an internal testing dashboard that allowed QA engineers to trigger automated test scenarios and view results in a table. Used polling via `setInterval` to stream test progress — not elegant, but shipped.
+
+## Results
+
+- Shipped features across both Android and iOS on schedule
+- Contributed to an RWD web admin panel used by internal operators
+- Delivered the testing dashboard from spec to deployment solo
+
+## Reflection
+
+This internship taught me the value of reading source code rather than just documentation. React Native's core is open source — when I didn't understand why something behaved a certain way, reading the underlying JS was usually faster than StackOverflow.
+
+If I were doing this today, I'd use Expo rather than bare React Native from the start — the managed workflow removes significant toolchain friction for a team this size.

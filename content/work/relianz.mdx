@@ -1,0 +1,83 @@
+---
+slug: relianz
+title: "Relianz Design System"
+subtitle: "Dual-brand component library for FinTech products"
+role: "Frontend Engineer"
+year: "2024"
+status: "published"
+order: 1
+stack: ["React", "TypeScript", "Tailwind CSS", "Storybook", "Go"]
+coverImage: "/images/relianz/cover.png"
+description: "Building a unified design system to support two concurrent FinTech products at Relianz 友信創新."
+---
+
+## Context
+
+Relianz operates two distinct FinTech products — an automated business registration platform and a cloud accounting system. Both products share a frontend stack (Next.js + Tailwind CSS) but had diverged visual languages due to independent feature development.
+
+The challenge: maintain two products solo during a team restructuring period while simultaneously improving design consistency and developer velocity.
+
+The inspiration was Revolut's internal design system architecture — a token-first approach where brand identity lives entirely in CSS custom properties, not in component logic.
+
+## Process
+
+**Research phase (2 weeks):**
+- Audited all existing UI components across both products
+- Mapped shared patterns: forms, tables, status indicators, navigation
+- Identified brand divergence points: color palettes, border radius, typography scale
+
+**Token design:**
+- Extracted 40+ color tokens as OKLCH variables (perceptually uniform across brands)
+- Created semantic aliases (`--color-primary`, `--color-surface`) that resolve differently per brand context
+- Documented token decisions in a shared Notion page
+
+**Component library:**
+- Built 30+ reusable components in isolation (Button, Input, Table, Dialog, etc.)
+- Each component accepts only token-based styling — no hardcoded hex values
+- Wrote unit tests for interactive components
+
+**Documentation:**
+- Storybook setup with brand-switch addon
+- Component API documented with JSDoc
+
+## Technical Highlights
+
+**Color token extraction:**
+
+The key insight was separating *what the color is* from *where it's used*. Each brand has its own token file that maps semantic names to OKLCH values. Switching brands is a single CSS class change.
+
+**Tailwind config:**
+
+```js
+// tailwind.config.ts
+colors: {
+  primary: 'var(--color-primary)',
+  surface: 'var(--color-surface)',
+  // ...
+}
+```
+
+This means component code never references specific colors — only semantic names. Brand-switching requires zero component changes.
+
+**Virtual List optimization:**
+
+One accounting table rendered 5000+ rows. Replaced naive `Array.map` rendering with a windowed virtual list, achieving a 70%+ performance improvement (measured via React DevTools profiler).
+
+## Results
+
+- **30+ components** covering ~90% of both products' UI needs
+- **70%+ performance improvement** on the core accounting table
+- **100+ enterprise clients** onboarded during the restructuring period
+- Product reached profitability in 2024, processing 10K+ monthly vouchers
+
+## Reflection
+
+**What I'd do differently:**
+
+The Storybook documentation started late — ideally it would be built in parallel with the components, not after. Documentation debt is real.
+
+**Next steps (if continuing):**
+
+- Migrate to a monorepo structure (Turborepo) to allow version-pinned consumption per product
+- Add visual regression testing (Chromatic)
+- Extract design tokens to a JSON source of truth (Style Dictionary)
