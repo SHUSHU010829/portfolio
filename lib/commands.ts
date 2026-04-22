@@ -32,6 +32,38 @@ export function buildCommands(router: { push: (href: string) => void }): Command
       keywords: ['work', 'cases', 'projects', 'portfolio', 'wrk'],
       action: () => router.push('/work'),
     },
+    {
+      id: 'nav-play',
+      label: 'cd /play',
+      description: 'Interactive experiments',
+      category: 'Navigation',
+      keywords: ['play', 'experiments', 'demos', 'interactive'],
+      action: () => router.push('/play'),
+    },
+    {
+      id: 'nav-play-ls',
+      label: 'ls ./play',
+      description: 'Browse experiments',
+      category: 'Navigation',
+      keywords: ['play', 'list', 'ls', 'experiments'],
+      action: () => router.push('/play'),
+    },
+    {
+      id: 'nav-about',
+      label: 'cd /about',
+      description: 'About Shuyuan',
+      category: 'Navigation',
+      keywords: ['about', 'bio', 'story', 'me', 'who'],
+      action: () => router.push('/about'),
+    },
+    {
+      id: 'nav-stream',
+      label: 'cd /stream',
+      description: 'Twitch & Discord live status',
+      category: 'Navigation',
+      keywords: ['stream', 'twitch', 'discord', 'live'],
+      action: () => router.push('/stream'),
+    },
 
     // Actions
     {
@@ -100,6 +132,35 @@ export function buildCommands(router: { push: (href: string) => void }): Command
       hidden: true,
       keywords: ['sudo', 'sandwich', 'easter'],
       action: () => alert('What? Make it yourself.'),
+    },
+    {
+      id: 'easter-sudo-room',
+      label: '$ sudo enter_space/',
+      description: 'Enter the room',
+      category: 'Easter',
+      hidden: true,
+      keywords: ['sudo', 'room', '3d', 'space', 'enter'],
+      action: () => router.push('/sudo'),
+    },
+    {
+      id: 'easter-tapi',
+      label: '$ ./tapi --force',
+      description: 'Where is Tapi?',
+      category: 'Easter',
+      hidden: true,
+      keywords: ['tapi', 'dog', 'idle'],
+      action: () => {
+        window.dispatchEvent(new CustomEvent('tapi:force'))
+      },
+    },
+    {
+      id: 'easter-secrets',
+      label: '$ ls ./secrets',
+      description: 'Track discovered easter eggs',
+      category: 'Easter',
+      hidden: true,
+      keywords: ['secrets', 'eggs', 'easter', 'discover'],
+      action: () => router.push('/secret'),
     },
   ]
 }

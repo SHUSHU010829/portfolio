@@ -1,76 +1,60 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getCaseStudies, getCaseStudy } from '@/lib/content'
+import { getExperiments, getExperiment } from '@/lib/content'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { TerminalPrompt } from '@/components/terminal/TerminalPrompt'
 import { TerminalCursor } from '@/components/terminal/TerminalCursor'
+import { MetaBar } from '@/components/play/MetaBar'
 
 type PageProps = {
   params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
-  const studies = await getCaseStudies()
-  return studies.map(s => ({ slug: s.slug }))
+  const experiments = await getExperiments()
+  return experiments.map(e => ({ slug: e.slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const study = await getCaseStudy(slug)
-  if (!study) return {}
+  const result = await getExperiment(slug)
+  if (!result) return {}
+  const { meta } = result
   return {
-    title: study.title,
-    description: study.description,
+    title: meta.title,
+    description: meta.description,
     openGraph: {
-      title: study.title,
-      description: study.description,
-      images: study.coverImage ? [study.coverImage] : ['/og-image.png'],
+      title: `${meta.title} — shu/dev`,
+      description: meta.description,
     },
   }
 }
 
-export default async function CaseStudyPage({ params }: PageProps) {
+export default async function PlayDetailPage({ params }: PageProps) {
   const { slug } = await params
-  const study = await getCaseStudy(slug)
+  const result = await getExperiment(slug)
 
-  if (!study) notFound()
+  if (!result) notFound()
 
-  // Dynamically import the MDX file
+  const { meta } = result
+
   let Content: React.ComponentType | null = null
   try {
-    const mod = await import(`@/content/work/${slug}.mdx`)
+    const mod = await import(`@/content/play/${slug}.mdx`)
     Content = mod.default
   } catch {
     notFound()
   }
 
-  // Prev / Next navigation
-  const allStudies = await getCaseStudies()
-  const idx = allStudies.findIndex(s => s.slug === slug)
-  const prev = idx > 0 ? allStudies[idx - 1] : null
-  const next = idx < allStudies.length - 1 ? allStudies[idx + 1] : null
-
-  const articleJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: study.title,
-    description: study.description,
-    author: {
-      '@type': 'Person',
-      name: 'Shuyuan Chuang',
-      url: 'https://shuyuan.tw',
-    },
-    url: `https://shuyuan.tw/work/${slug}`,
-  }
+  const allExperiments = await getExperiments()
+  const idx = allExperiments.findIndex(e => e.slug === slug)
+  const prev = idx > 0 ? allExperiments[idx - 1] : null
+  const next = idx < allExperiments.length - 1 ? allExperiments[idx + 1] : null
 
   return (
     <div className="flex min-h-screen flex-col bg-bg">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
       <Navbar />
       <main className="flex flex-col gap-8 px-10 pb-10 pt-10">
         {/* Breadcrumb */}
@@ -79,8 +63,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
             /
           </Link>
           {' > '}
-          <Link href="/work" className="hover:text-fg transition-colors duration-fast">
-            work
+          <Link href="/play" className="hover:text-fg transition-colors duration-fast">
+            play
           </Link>
           {' > '}
           <span className="text-fg-muted">{slug}</span>
@@ -88,29 +72,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
         {/* Header */}
         <TerminalPrompt className="text-sm">
-          cat {slug}.md
+          cat {slug}.mdx
         </TerminalPrompt>
 
         {/* Meta */}
-        <div className="flex flex-wrap gap-4 font-mono text-sm text-fg-muted border-b border-border pb-6">
-          <span>{study.role}</span>
-          <span>·</span>
-          <span>{study.year}</span>
-          {study.stack && (
-            <>
-              <span>·</span>
-              <div className="flex flex-wrap gap-1">
-                {study.stack.map(t => (
-                  <span
-                    key={t}
-                    className="rounded border border-border px-1.5 py-0.5 text-[10px] text-fg-subtle"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </>
-          )}
+        <div className="border-b border-border pb-6">
+          <MetaBar
+            difficulty={meta.difficulty}
+            duration={meta.duration}
+            stack={meta.stack}
+          />
         </div>
 
         {/* MDX content */}
@@ -127,11 +98,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
         {(prev || next) && (
           <nav
             className="flex items-center justify-between border-t border-border pt-6 font-mono text-sm"
-            aria-label="Case study navigation"
+            aria-label="Experiment navigation"
           >
             {prev ? (
               <Link
-                href={`/work/${prev.slug}`}
+                href={`/play/${prev.slug}`}
                 className="flex flex-col gap-1 text-fg-muted hover:text-fg transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
               >
                 <span className="text-xs text-fg-subtle">← prev</span>
@@ -142,7 +113,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             )}
             {next ? (
               <Link
-                href={`/work/${next.slug}`}
+                href={`/play/${next.slug}`}
                 className="flex flex-col gap-1 text-right text-fg-muted hover:text-fg transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
               >
                 <span className="text-xs text-fg-subtle">next →</span>

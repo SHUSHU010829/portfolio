@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { JetBrains_Mono, Geist_Mono, Geist } from 'next/font/google'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { CommandPaletteProvider } from '@/components/command/CommandPalette'
+import { ConsoleMessage } from '@/components/EasterEgg/ConsoleMessage'
+import { GlitchMode } from '@/components/EasterEgg/GlitchMode'
+import { TapiIdle } from '@/components/EasterEgg/TapiIdle'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
@@ -46,6 +49,18 @@ export const metadata: Metadata = {
   },
 }
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Shuyuan Chuang',
+  url: 'https://shuyuan.tw',
+  jobTitle: 'Frontend Engineer',
+  sameAs: [
+    'https://github.com/SHUSHU010829',
+    'https://linkedin.com/in/shuyuanchuang',
+  ],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -53,6 +68,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+      </head>
       <body
         className={`${jetbrainsMono.variable} ${geistMono.variable} ${geist.variable} antialiased`}
       >
@@ -64,6 +85,9 @@ export default function RootLayout({
           <CommandPaletteProvider>
             <div className="mx-auto max-w-[768px]">{children}</div>
           </CommandPaletteProvider>
+          <ConsoleMessage />
+          <GlitchMode />
+          <TapiIdle />
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

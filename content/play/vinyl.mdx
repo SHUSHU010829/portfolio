@@ -1,0 +1,52 @@
+---
+slug: vinyl
+title: "CSS Vinyl Record"
+subtitle: "A pure CSS spinning vinyl with play/pause state"
+duration: "2h"
+year: "2024"
+stack: ["CSS", "React", "animation-play-state"]
+difficulty: "beginner"
+status: "published"
+previewMode: "inline"
+description: "A vinyl record that rotates purely via CSS @keyframes and animation-play-state toggle. No JavaScript animation loops, no requestAnimationFrame — just a CSS class swap."
+---
+
+## Context
+
+I wanted a vinyl animation for the `/sudo` easter egg room, but the spin logic felt too important to hide inside a 3D component. So I isolated it as a standalone CSS experiment.
+
+The goal: make a vinyl record that plays and pauses purely via CSS, with zero JavaScript animation logic.
+
+## How It Works
+
+The rotation lives in a single `@keyframes spin` rule. Toggling `animation-play-state: paused` via a prop-driven className swap handles the play/pause. React only manages state — the animation engine is the browser.
+
+```css
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.playing {
+  animation: vinyl-spin 2s linear infinite;
+}
+
+.paused {
+  animation: vinyl-spin 2s linear infinite;
+  animation-play-state: paused;
+}
+```
+
+## Why This Approach
+
+- **Zero JS animation loop** — no `requestAnimationFrame`, no frame callbacks
+- **Instant state change** — CSS transitions handle the resume smoothly
+- **`prefers-reduced-motion`** — one media query disables the entire animation
+
+## Try It
+
+Use the toggle below to play and pause the vinyl.
+
+## Reflection
+
+The interesting part was discovering that `animation-play-state: paused` preserves the current rotation angle — so resuming doesn't snap back to 0°. The browser keeps the animation position in memory.

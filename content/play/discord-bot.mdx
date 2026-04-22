@@ -1,0 +1,38 @@
+---
+slug: discord-bot
+title: "Discord Valorant Bot"
+subtitle: "A slash-command bot for match tracking and rank display"
+duration: "1 week"
+year: "2023"
+stack: ["Node.js", "discord.js", "Riot API", "TypeScript"]
+difficulty: "intermediate"
+status: "published"
+previewMode: "video"
+description: "A Discord bot that pulls live Valorant rank data from the Riot API and posts match summaries into server channels via slash commands."
+---
+
+## Context
+
+My gaming server wanted a way to check Valorant ranks without leaving Discord. The Riot API is public, discord.js is well-documented, and I had a weekend.
+
+## How It Works
+
+The bot listens for slash commands via the Discord Gateway. When `/rank @user` fires, it:
+1. Looks up the user's Riot account ID from a local SQLite map
+2. Fetches rank data from `api.henrikdev.xyz` (unofficial Riot API wrapper)
+3. Formats a rich embed with tier, RR, recent W/L streak
+4. Posts it back to the channel
+
+## Technical Highlights
+
+- **Slash commands** registered via `REST.put()` at startup — updates propagate within minutes
+- **Rate limiting** — exponential backoff on Riot API 429s with a 5-minute cache per player
+- **Error handling** — all slash commands catch unknown Riot accounts and respond with a terminal-style error embed
+
+## Results
+
+Running in 1 server, ~20 active users. Zero crashes over 6 months of uptime (hosted on Railway).
+
+## Reflection
+
+The Riot API's rate limits are genuinely painful. Caching was more important than the actual bot logic.

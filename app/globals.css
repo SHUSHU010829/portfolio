@@ -212,6 +212,46 @@
   50%, 100% { opacity: 0; }
 }
 
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.vinyl-playing {
+  animation: vinyl-spin 2s linear infinite;
+}
+
+.vinyl-paused {
+  animation: vinyl-spin 2s linear infinite;
+  animation-play-state: paused;
+}
+
+/* Konami glitch mode */
+@keyframes glitch-turbulence {
+  0%, 100% { opacity: 1; }
+  10%       { opacity: 0.8; }
+  20%       { opacity: 1; }
+  50%       { opacity: 0.9; }
+  70%       { opacity: 1; }
+}
+
+@keyframes glitch-rgb-split {
+  0%   { text-shadow: none; }
+  20%  { text-shadow: 2px 0 #ff0055, -2px 0 #00ffee; }
+  40%  { text-shadow: -2px 0 #ff0055, 2px 0 #00ffee; }
+  60%  { text-shadow: 1px 0 #ff0055, -1px 0 #00ffee; }
+  80%  { text-shadow: none; }
+  100% { text-shadow: none; }
+}
+
+html.glitch-active {
+  animation: glitch-turbulence 0.3s step-end infinite;
+}
+
+html.glitch-active body * {
+  animation: glitch-rgb-split 0.2s step-end infinite;
+}
+
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 4px oklch(0.65 0.18 250); }
   50%       { box-shadow: 0 0 8px oklch(0.65 0.18 250), 0 0 12px oklch(0.65 0.18 250); }

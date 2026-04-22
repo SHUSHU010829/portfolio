@@ -1,0 +1,38 @@
+---
+slug: overlay
+title: "CSS Blur Overlay"
+subtitle: "Backdrop blur compositing with layered opacity"
+duration: "1h"
+year: "2024"
+stack: ["CSS", "backdrop-filter", "React"]
+difficulty: "beginner"
+status: "published"
+previewMode: "inline"
+description: "An exploration of backdrop-filter: blur() compositing. Layering translucent surfaces over content to achieve the frosted-glass effect without a single drop shadow."
+---
+
+## Context
+
+Frosted glass UI has become a common pattern, but most implementations reach for `box-shadow` or heavy-blur libraries. This experiment explores the CSS-native path.
+
+## How It Works
+
+`backdrop-filter: blur()` composites directly against the content below the element. Combined with a translucent `background-color`, it creates the frosted-glass effect purely in CSS.
+
+```css
+.overlay {
+  backdrop-filter: blur(12px);
+  background-color: oklch(0.12 0 0 / 0.7);
+  border: 1px solid oklch(0.22 0 0);
+}
+```
+
+## Why This Approach
+
+- **No extra DOM** — applies to the element itself, not a sibling or pseudo
+- **GPU-accelerated** — the browser handles compositing
+- **Composable** — stacks correctly with other transforms
+
+## Reflection
+
+`backdrop-filter` has a subtle gotcha: the element must not have `overflow: hidden` set before the filter renders in Safari. Worth keeping in mind for modal dialogs.

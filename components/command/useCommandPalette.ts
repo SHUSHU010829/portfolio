@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useCallback } from 'react'
+import { events } from '@/lib/analytics'
 
 type CommandPaletteContextValue = {
   open: boolean
@@ -20,7 +21,13 @@ export function useCommandPalette() {
 
 export function useCommandPaletteState(): CommandPaletteContextValue {
   const [open, setOpenState] = useState(false)
-  const setOpen = useCallback((v: boolean) => setOpenState(v), [])
-  const toggle = useCallback(() => setOpenState(prev => !prev), [])
+  const setOpen = useCallback((v: boolean) => {
+    if (v) events.commandPaletteOpen()
+    setOpenState(v)
+  }, [])
+  const toggle = useCallback(() => setOpenState(prev => {
+    if (!prev) events.commandPaletteOpen()
+    return !prev
+  }), [])
   return { open, setOpen, toggle }
 }
