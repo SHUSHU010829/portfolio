@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import resumeData from "@/data/resume.json";
+import type { ResumeData } from "@/types/resume";
+
+const data = resumeData as ResumeData;
 
 export default function Overview() {
   const [time, setTime] = useState<string | null>(null);
@@ -11,9 +15,8 @@ export default function Overview() {
       try {
         const now = new Date();
 
-        // Format time in Asia/Taipei timezone using Intl API
         const timeFormatter = new Intl.DateTimeFormat("en-US", {
-          timeZone: "Asia/Taipei",
+          timeZone: data.basics.locationTimezone,
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
@@ -22,9 +25,8 @@ export default function Overview() {
 
         setTime(timeFormatter.format(now));
 
-        // Calculate time difference
-        const userOffset = -now.getTimezoneOffset() / 60; // User's timezone offset in hours
-        const targetOffset = 8; // UTC+8
+        const userOffset = -now.getTimezoneOffset() / 60;
+        const targetOffset = 8; // UTC+8 for Asia/Taipei
         const diff = targetOffset - userOffset;
 
         if (diff === 0) {
@@ -59,7 +61,7 @@ export default function Overview() {
               $ Position
             </span>
             <span className="font-secondary text-sm font-bold text-foreground break-words">
-              Frontend Developer
+              {data.basics.title}
             </span>
           </div>
           <div className="flex min-w-0 flex-col gap-1">
@@ -67,7 +69,7 @@ export default function Overview() {
               $ Location
             </span>
             <span className="font-secondary text-sm font-bold text-foreground break-words">
-              Taipei, Taiwan
+              {data.basics.location}
             </span>
           </div>
           <div className="flex min-w-0 flex-col gap-1">
@@ -75,7 +77,7 @@ export default function Overview() {
               $ Portfolio
             </span>
             <span className="font-secondary text-sm font-bold text-primary break-all">
-              https://shuyuan.dev
+              {data.basics.portfolio}
             </span>
           </div>
         </div>
@@ -85,7 +87,7 @@ export default function Overview() {
               $ Email Address
             </span>
             <span className="font-secondary text-sm font-bold text-foreground break-all">
-              shuyuan010829@gmail.com
+              {data.basics.email}
             </span>
           </div>
           <div className="flex min-w-0 flex-col gap-1">

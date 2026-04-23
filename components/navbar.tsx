@@ -2,6 +2,7 @@
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { NowPlaying } from "@/components/ui/now-playing";
+import { ResumeDownload } from "@/components/ui/resume-download";
 import { useCommandPalette } from "@/components/command/useCommandPalette";
 
 export default function Navbar() {
@@ -14,6 +15,7 @@ export default function Navbar() {
       </h1>
       <div className="flex min-w-0 items-center gap-4">
         <NowPlaying />
+        <ResumeDownload />
         <button
           onClick={toggle}
           className="md:hidden flex items-center justify-center h-8 px-2 font-mono text-xs text-fg-muted hover:text-fg border border-border hover:border-border-hover rounded-sm transition-colors duration-[120ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"

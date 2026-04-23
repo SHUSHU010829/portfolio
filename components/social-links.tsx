@@ -1,15 +1,28 @@
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, type LucideIcon } from "lucide-react";
+import resumeData from "@/data/resume.json";
+import type { ResumeData } from "@/types/resume";
+
+const data = resumeData as ResumeData;
+
+// Map network name to icon component
+const NETWORK_ICONS: Record<string, LucideIcon> = {
+  GitHub: Github,
+  LinkedIn: Linkedin,
+  Twitter: Twitter,
+};
 
 export default function SocialLinks() {
   const links = [
-    { icon: Github, label: "GitHub", href: "https://github.com/SHUSHU010829" },
+    ...data.basics.profiles.map((profile) => ({
+      icon: NETWORK_ICONS[profile.network] || Mail,
+      label: profile.network,
+      href: profile.url,
+    })),
     {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/shuyuanchuang",
+      icon: Mail,
+      label: "Email",
+      href: `mailto:${data.basics.email}`,
     },
-    { icon: Twitter, label: "Twitter", href: "https://x.com/shuyuan010829" },
-    { icon: Mail, label: "Email", href: "mailto:shuyuan010829@gmail.com" },
   ];
 
   return (
